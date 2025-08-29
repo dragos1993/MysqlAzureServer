@@ -18,7 +18,7 @@ spec:
       initContainers:
         - name: init-db
           image: busybox:1.31
-          command: ['sh', '-c', 'echo -e "Checking for the availability of MySQL Server deployment"; while ! nc -z mysql 3306; do sleep 1; printf "-"; done; echo -e "  >> MySQL DB Server has started";']      
+          command: ['sh', '-c', 'echo -e "Checking for the availability of MySQL Server deployment"; while ! nc -z mysql-server3.mysql.database.azure.com 3306; do sleep 1; printf "-"; done; echo -e "  >> MySQL DB Server has started";']      
       containers:
         - name: usermgmt-webapp
           image: acrrg9.azurecr.io/kube-usermgmt-webapp:1.0.0-MySQLDB
@@ -27,15 +27,17 @@ spec:
             - containerPort: 8080           
           env:
             - name: DB_HOSTNAME
-              value: "mysql"            
+              value: "mysql-server3.mysql.database.azure.com"            
             - name: DB_PORT
               value: "3306"            
             - name: DB_NAME
               value: "webappdb"            
             - name: DB_USERNAME
-              value: "root"            
+              value: "Farbe1993@mysql-server3"            
             - name: DB_PASSWORD
               valueFrom: 
                 secretKeyRef:
                   name: mysql-db-password
-                  key: db-password       
+                  key: db-password
+            - name: DB_SSL
+              value: "true"
