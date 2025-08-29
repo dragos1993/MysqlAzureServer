@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-webappdb
+  namespace: argocd
+spec:
+  template:
+    spec:
+      containers:
+        - name: mysql-client
+          image: mysql:8.0
+          command: ["sh", "-c"]
+          args:
+            - >
+              mysql -h mysql-server3.mysql.database.azure.com
+              -u Farbe1993@mysql-server3
+              -p"$DB_PASSWORD"
+              --ssl-mode=REQUIRED < /scripts/init.sql
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-db-password
+                  key: db-password
+          volumeMounts:
+            - name: sql-script
+              mountPath: /scripts
+      restartPolicy: OnFailure
+      volumes:
+        - name: sql-script
+          configMap:
+            name: usermanagement-dbcreation-script

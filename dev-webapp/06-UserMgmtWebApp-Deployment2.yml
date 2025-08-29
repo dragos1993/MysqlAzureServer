@@ -33,7 +33,7 @@ spec:
             - name: DB_NAME
               value: "webappdb"            
             - name: DB_USERNAME
-              value: "Farbe199"            
+              value: "Farbe1993"            
             - name: DB_PASSWORD
               valueFrom: 
                 secretKeyRef:

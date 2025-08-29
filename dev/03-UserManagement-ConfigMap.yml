@@ -3,7 +3,6 @@ kind: ConfigMap
 metadata:
   name: usermanagement-dbcreation-script
   namespace: argocd
-data: 
-  mysql_usermgmt.sql: |-
-    DROP DATABASE IF EXISTS webappdb;
-    CREATE DATABASE webappdb; 
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS webappdb;
