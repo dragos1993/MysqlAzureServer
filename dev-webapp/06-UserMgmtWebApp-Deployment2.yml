@@ -27,7 +27,7 @@ spec:
             - containerPort: 8080           
           env:
             - name: DB_HOSTNAME
-              value: "mysql-server3.mysql.database.azure.com"            
+              value: "mysql-server-backup.mysql.database.azure.com"            
             - name: DB_PORT
               value: "3306"            
             - name: DB_NAME
