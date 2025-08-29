@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/dragos1993/top1.git
+    repoURL: https://github.com/dragos1993/MysqlAzureServer.git
     targetRevision: HEAD
     path: dev-webapp
   destination:
